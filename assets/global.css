@@ -1,0 +1,38 @@
+* {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+main {
+    min-height:87vh;
+}
+
+.title {
+    font-family: 'Arvo', serif;
+}
+
+a:hover{
+    color: #0000FF !important;
+}
+
+.navbar,.navbar-menu,.navbar-link:hover,.navbar-item:focus,.navbar-dropdown,.dropdown-item:hover,.navbar-item:hover{
+    background-color: #7b5544 !important;
+}
+
+.navbar-link::after {
+    border: 1px solid #7b5544 !important;
+    border-right: 0 !important;
+    border-top: 0 !important;
+    content: " ";
+    display: block;
+    height: .5em;
+    pointer-events: none;
+    position: absolute;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    width: .5em;
+    margin-top: -.375em;
+    right: 1.125em;
+    top: 50%;
+}

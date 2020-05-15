@@ -88,3 +88,11 @@ sw.*
 
 # Vim swap files
 *.swp
+.vscode/
+public/
+.firebaserc
+firebase.json
+storage.rules
+firestore.rules
+firestore.indexes.json
+database.rules.json

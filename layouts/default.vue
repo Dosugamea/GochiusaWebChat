@@ -1,55 +1,77 @@
 <template>
-  <div>
-    <nuxt />
+  <div id="app">
+    <NavbarUp />
+    <main>
+      <nuxt />
+    </main>
+    <transition name="fade">
+      <a v-show="showJump" v-scroll-to="'#app'" href="#" class="scroll-top">
+        <Fas i="angle-up" classes="scroll-icon" />
+      </a>
+    </transition>
   </div>
 </template>
 
+<script>
+/*
+上に戻るボタンは 下記サイトより。
+https://note.com/aliz/n/nfd2bfc514ace
+https://helloworld-blog.tech/javascript/vue-js-smooth-scroll%E3%81%A7top%E3%81%AB%E6%88%BB%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E5%AE%9F%E8%A3%85%E3%81%99%E3%82%8B
+
+*/
+import NavbarUp from '~/components/nav/NavbarUp.vue'
+import Fas from '~/components/ui/Fas.vue'
+
+export default {
+  components: {
+    NavbarUp,
+    Fas
+  },
+  data () {
+    return {
+      scrollY: 0
+    }
+  },
+  computed: {
+    showJump () {
+      return Boolean(this.scrollY > 200)
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('load', () => {
+      this.onScroll()
+    })
+  },
+  methods: {
+    onScroll () {
+      this.scrollY = window.pageYOffset
+    }
+  }
+}
+</script>
+
 <style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #000;
+  padding: 10px 16px;
+  border-radius: 32px;
 }
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
+.scroll-icon {
+  font-weight: bold;
+  font-size: 20px;
   color: #fff;
-  background-color: #3b8070;
 }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
