@@ -96,3 +96,4 @@ storage.rules
 firestore.rules
 firestore.indexes.json
 database.rules.json
+static/meigen.jpg

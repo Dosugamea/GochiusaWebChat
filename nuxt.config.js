@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
@@ -42,7 +42,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/vue-scrollto'
+    '~/plugins/vue-scrollto',
+    '~/plugins/firebase'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -145,7 +146,12 @@ export default {
       },
       {
         set: '@fortawesome/free-brands-svg-icons', // Brand icons
-        icons: ['faTwitterSquare', 'faLine']
+        icons: [
+          'faTwitterSquare',
+          'faLine',
+          'faGoogle',
+          'faGithub'
+        ]
       }
     ]
   },
