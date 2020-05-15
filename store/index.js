@@ -1,16 +1,16 @@
 import firebase from '~/plugins/firebase'
 
 export const state = () => ({
-  userUid: '',
-  userName: ''
+  user: {
+    uid: '',
+    displayName: '',
+    photoURL: ''
+  }
 })
 
 export const mutations = {
-  setUserUid (state, userUid) {
-    state.userUid = userUid
-  },
-  setUserName (state, userName) {
-    state.userName = userName
+  setUser (state, userObj) {
+    state.user = userObj
   }
 }
 
@@ -23,20 +23,24 @@ export const actions = {
       provider = new firebase.auth.GithubAuthProvider()
     }
     firebase.auth().signInWithPopup(provider).then(function (result) {
-      const user = result.user
-      commit('setUserUid', user.uid)
-      commit('setUserName', user.displayName)
+      commit('setUser', { uid: result.user.uid, displayName: result.user.displayName, photoURL: result.user.photoURL })
     }).catch(function (error) {
       alert(`ログインエラー: ${error.code}`)
     })
+  },
+  logout ({ commit }) {
+    commit('setUser', { uid: '', displayName: '', photoURL: '' })
   }
 }
 
 export const getters = {
   getUserUid (state) {
-    return state.userUid
+    return state.user.uid
   },
   getUserName (state) {
-    return state.userName
+    return state.user.displayName
+  },
+  getUserPhoto (state) {
+    return state.user.photoURL
   }
 }
